@@ -178,6 +178,7 @@ MOBILE HEADER  (visible ≤ 900px)
 	margin: 0 0 16px;
 	line-height: 1.5;
 	opacity: 0.85;
+	white-space: nowrap; 
 }
 
 /* CHOOSE GIFT button inside drawer — yellow */
