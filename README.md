@@ -4,7 +4,8 @@
 ### 1. Hero Banner 
 ### 2.Product Grid and MODAL
 ### 3. Auto add to CART "soft jacket" PRODUCT
-# 🔗 Live Preview & Git Integration
+# 🔗 Live Preview & Git Integration : https://varshitha-br-48-teststore.myshopify.com/pages/contact?view=bannerandgrid
+password: varshithabr123
 
 ## Project Structure
 
