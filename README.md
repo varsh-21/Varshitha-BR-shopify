@@ -41,7 +41,7 @@
 
 
 ## ADMIN section
-#### In admin add the exact product name you want to auto Add the respective Product
+#### In admin add the exact product name if you want to auto Add any other Product
   <img width="280" height="535" alt="Screenshot from 2026-05-01 15-57-39" src="https://github.com/user-attachments/assets/ecf8abd9-501d-4175-82ec-acc68f07a1a7" />
 
 ## Custom  Text
