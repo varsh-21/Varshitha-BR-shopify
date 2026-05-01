@@ -1,0 +1,234 @@
+{{ 'product-grid.css' | asset_url | stylesheet_tag }}
+{{ 'product-grid.js' | asset_url | script_tag }}
+
+{% comment %}
+  Section: tisso-product-grid.liquid
+  Description: 6-product grid + popup modal — pixel-perfect Figma match.
+  Modal features:
+    - Product image (left), content (right)
+    - Price, Title, Description
+    - Color swatches: each swatch has a LEFT BORDER in the actual color value
+    - Size dropdown
+    - All variant data 100% dynamic from Shopify product
+    - Functional AJAX Add to Cart
+    - Auto-add Soft Winter Jacket when Black + Medium selected
+  Dawn components.
+{% endcomment %}
+
+{% assign jacket_product = all_products[section.settings.soft_winter_jacket_handle] %}
+
+{{ 'product-grid.css' | asset_url | stylesheet_tag }}
+{{ 'product-grid.js' | asset_url | script_tag }}
+
+{% assign jacket_product = all_products[section.settings.soft_winter_jacket_handle] %}
+{% assign jacket_variant = nil %}
+
+{% if jacket_product != blank %}
+  {% for variant in jacket_product.variants %}
+    {%- comment -%} Convert title to lowercase and split by slashes to find the specific size word {%- endcomment -%}
+    {% assign title_parts = variant.title | downcase | replace: '/', ' ' | split: ' ' %}
+    
+    {% if title_parts contains 'medium' or title_parts contains 'm' %}
+      {% assign jacket_variant = variant %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {%- comment -%} Final Fallback: If still nil, just get the first one so the code doesn't break {%- endcomment -%}
+  {% if jacket_variant == nil %}
+    {% assign jacket_variant = jacket_product.variants.first %}
+  {% endif %}
+{% endif %}
+
+<section
+  id="tisso-grid"
+  class="tisso-grid"
+  data-soft-jacket-variant="{{ jacket_variant.id | default: 0 }}"
+>
+  <div class="tisso-grid__inner">
+    <h2 class="wild__heading">{{ section.settings.wild_heading | default: 'Tisso vison in the wild' }}</h2>
+    <ul class="tisso-grid__list" role="list">
+
+      {%- for block in section.blocks -%}
+        {%- assign product = all_products[block.settings.product] -%}
+        {%- if product == blank -%}{%- continue -%}{%- endif -%}
+
+      {%- comment -%} Build variants JSON — no JSDoc curly braces to confuse Liquid {%- endcomment -%}
+        {%- capture variants_json -%}[{%- for v in product.variants -%}{"id":{{ v.id }},"title":{{ v.title | json }},"price":{{ v.price | money | json }},"available":{{ v.available }},"option1":{{ v.option1 | json }},"option2":{{ v.option2 | json }},"option3":{{ v.option3 | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]{%- endcapture -%}
+
+        {%- capture options_json -%}[{%- for o in product.options_with_values -%}{"name":{{ o.name | json }},"values":{{ o.values | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]{%- endcapture -%}
+
+        <li
+          class="tisso-grid__item"
+          {{ block.shopify_attributes }}
+          data-product-id="{{ product.id }}"
+          data-product-title="{{ product.title | escape }}"
+          data-product-price="{{ product.price | money }}"
+          data-product-description="{{ product.description | strip_html | truncate: 280 | escape }}"
+          data-product-image="{{ product.featured_image | image_url: width: 800 }}"
+          data-product-variants="{{ variants_json | escape }}"
+          data-product-options="{{ options_json | escape }}"
+        >
+          <button class="tisso-grid__card" type="button" data-open-modal aria-label="View {{ product.title | escape }}">
+            <div class="tisso-grid__img-wrap">
+              {%- if product.featured_image -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 433, height: 444, crop: 'center'
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'tisso-grid__img',
+                    alt: product.featured_image.alt | default: product.title
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'tisso-grid__img' }}
+              {%- endif -%}
+              <div class="tisso-grid__overlay" aria-hidden="true">
+                <span class="tisso-grid__overlay-text">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="7.85714" cy="7.85714" r="7.85714" fill="#F8F8F8" fill-opacity="0.9"/>
+                  <path d="M8.10449 5.02991V11.0739" stroke="black" stroke-linecap="square" stroke-linejoin="round"/>
+                  <path d="M5.08252 8.05188H11.1265" stroke="black" stroke-linecap="square" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </button>
+        </li>
+      {%- endfor -%}
+
+    </ul>
+  </div>
+</section>
+
+
+{%- comment -%} ── POPUP MODAL ── {%- endcomment -%}
+<div
+  id="tisso-modal"
+  class="tisso-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="tisso-modal-title"
+  aria-hidden="true"
+>
+  <div class="tisso-modal__backdrop" data-modal-close></div>
+
+  <div class="tisso-modal__panel">
+
+    {%- comment -%} Close button (×) top right {%- endcomment -%}
+    <button class="tisso-modal__close" type="button" data-modal-close aria-label="Close">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+        <path d="M1 1L9 9M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="tisso-modal__body">
+
+      {%- comment -%} TOP ROW: image col | title + price + desc {%- endcomment -%}
+      <div class="tisso-modal__top-row">
+        <div class="tisso-modal__img-col">
+          <img id="tisso-modal-img" class="tisso-modal__img" src="" alt="" loading="lazy">
+        </div>
+        <div class="tisso-modal__info-col">
+          <h2 id="tisso-modal-title" class="tisso-modal__title"></h2>
+          <p id="tisso-modal-price" class="tisso-modal__price"></p>
+          <p id="tisso-modal-desc" class="tisso-modal__desc"></p>
+        </div>
+      </div>
+
+      {%- comment -%} DIVIDER {%- endcomment -%}
+      <div class="tisso-modal__divider"></div>
+
+      {%- comment -%} BOTTOM: variant selectors — 271px content (20px padding each side) {%- endcomment -%}
+      <div class="tisso-modal__bottom">
+        <div id="tisso-modal-variants" class="tisso-modal__variants"></div>
+      </div>
+
+      {%- comment -%} ADD TO CART — pinned to bottom {%- endcomment -%}
+      <div class="tisso-modal__atc-wrap">
+        <button id="tisso-modal-atc" class="tisso-modal__atc" type="button" disabled>
+          <span id="tisso-modal-atc-label" class="tisso-modal__atc-label">ADD TO CART</span>
+          <span class="tisso-arrow-wrap" aria-hidden="true">
+            <span class="tisso-arrow-track">
+              <svg
+              class="tisso-arrow-icon"
+              width="34"
+              height="12"
+              viewBox="0 0 34 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              >
+              <path
+                d="M0 6H30M30 6L25 1M30 6L25 11"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+        <p id="tisso-modal-status" class="tisso-modal__status" role="status" aria-live="polite"></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Product Grid",
+  "tag": "section",
+  "class": "tisso-grid-section",
+
+  "settings": [
+    {
+      "type": "header",
+      "content": "Auto-add Rule"
+    },
+    {
+      "type": "text",
+      "id": "wild_heading",
+      "label": "Header Left Text",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "text",
+      "id": "soft_winter_jacket_handle",
+      "label": "Soft Winter Jacket — Product Handle",
+      "info": "Exact product handle from the URL. Auto-added when Black + Medium variant is added.",
+      "default": "dark-winter-jacket"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Product Grid",
+      "category": "Custom",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

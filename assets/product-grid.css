@@ -1,0 +1,555 @@
+/* =============================================
+ PRODUCT GRID
+============================================= */
+
+.wild__heading {
+	font-size: 36px;
+	font-weight: 400;
+	font-family: var(--font-body-family);
+}
+
+/* =============================================
+    GRID
+    ============================================= */
+.tisso-grid {
+	background: #fff;
+	padding: 15px 10px;
+}
+
+.tisso-grid__inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 40px 60px;
+}
+
+.tisso-grid__list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 4px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Card */
+.tisso-grid__card {
+	display: block;
+	width: 100%;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	position: relative;
+}
+
+.tisso-grid__img-wrap {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 433 / 444;
+	/* square */
+	max-width: 444px;
+	background: #f2f2f2;
+}
+
+.tisso-grid__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tisso-grid__card:hover .tisso-grid__img {
+	transform: scale(1.05);
+}
+
+/* overlay */
+.tisso-grid__overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.tisso-grid__card .tisso-grid__overlay {
+	opacity: 1;
+}
+
+.tisso-grid__overlay-text {
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	padding: 8px 16px;
+}
+
+/* =============================================
+    MODAL BACKDROP + PANEL
+    ============================================= */
+.tisso-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.25s ease;
+}
+
+.tisso-modal.is-open {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.tisso-modal__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+}
+
+/* Panel: exact spec 311×447px */
+.tisso-modal__panel {
+	position: relative;
+	z-index: 1;
+	background: #ffffff;
+	width: 311px;
+	height: 447px;
+	overflow: hidden;
+	transform: translateY(20px);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	filter: drop-shadow(0 2px 4px #00000033);
+}
+
+.tisso-modal.is-open .tisso-modal__panel {
+	transform: translateY(0);
+}
+
+/* Close × */
+.tisso-modal__close {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	z-index: 10;
+	width: 20px;
+	height: 20px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--black);
+	line-height: 0;
+	transition: opacity 0.2s;
+}
+
+.tisso-modal__close:hover {
+	opacity: 0.4;
+}
+
+/* Body: flex column — top-row + divider + bottom + atc */
+.tisso-modal__body {
+	width: 311px;
+	height: 447px;
+	display: flex;
+	flex-direction: column;
+}
+
+/* ── TOP ROW: 118px image | remaining info ── */
+.tisso-modal__top-row {
+	display: grid;
+	grid-template-columns: 118px 1fr;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+/* LEFT image col */
+.tisso-modal__img-col {
+	overflow: hidden;
+}
+
+.tisso-modal__img {
+	width: 120px;
+	height: 140px;
+	object-fit: cover;
+	display: block;
+	padding: 16px 0 0 16px;
+}
+
+/* RIGHT info col: title + price + desc */
+.tisso-modal__info-col {
+	padding: 35px 14px 12px 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+/* Title */
+.tisso-modal__title {
+	font-size: 16px;
+	font-weight: 300;
+	margin: 0;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	color: var(--black)
+}
+
+/* Price */
+.tisso-modal__price {
+	font-size: 16px;
+	font-weight: 400;
+	margin: 0;
+	color: var(--black);
+	letter-spacing: 0.03em;
+}
+
+/* Description */
+.tisso-modal__desc {
+	font-size: 14px;
+	font-weight: 300;
+	height: 64px;
+	line-height: 1.6;
+	color: var(--black);
+	margin: 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* Divider */
+.tisso-modal__divider {
+	height: 1px;
+	background: #e8e8e8;
+	margin: 0 20px;
+	flex-shrink: 0;
+}
+
+/* BOTTOM: 271px content (20px padding each side) */
+.tisso-modal__bottom {
+	padding: 10px 20px 0;
+	flex: 1;
+	overflow: hidden;
+}
+
+/* =============================================
+    VARIANT SELECTORS
+    ============================================= */
+.tisso-modal__variants {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.tisso-modal__option {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* Option label e.g. "Color", "Size" */
+.tisso-modal__option-label {
+	font-size: 14px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: var(--grey);
+	margin: 0;
+}
+
+/* ── COLOR SWATCHES: fill 271px, equal halves ── */
+.tisso-modal__swatches {
+	display: flex;
+	flex-wrap: nowrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 271px;
+	background: var(--black);
+}
+
+.tisso-modal__swatches li {
+	flex: 1;
+	list-style: none;
+}
+
+.tisso-modal__swatch {
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+	height: 34px;
+	padding: 0 8px;
+	background: var(--off-white);
+	border: 1px solid #e0e0e0;
+	border-left-width: 5px;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: var(--font-body-family);
+	color: var(--black);
+	cursor: pointer;
+	white-space: nowrap;
+	letter-spacing: 0.03em;
+	transition: border-color 0.15s ease, background 0.15s ease;
+	box-sizing: border-box;
+}
+
+.tisso-modal__swatch:hover {
+	border-color: #aaa;
+	background: var(--black);
+	color: var(--off-white);
+}
+
+.tisso-modal__swatch.is-selected {
+	border-color: var(--black);
+	border-left-color: inherit;
+	border-left-width: 5px;
+	background: var(--off-white);
+	font-weight: 400;
+	color: var(--black);
+}
+
+.tisso-modal__swatch.is-unavailable {
+	opacity: 0.3;
+	cursor: not-allowed;
+	text-decoration: line-through;
+}
+
+/* ── SIZE DROPDOWN: 271px ── */
+.tisso-modal__select-wrap {
+	position: relative;
+	width: 271px;
+}
+
+.tisso-modal__size-select {
+	width: 100%;
+	height: 34px;
+	padding: 0 32px 0 12px;
+	border: 1px solid #e0e0e0;
+	background: #fff;
+	font-size: 16px;
+	color: var(--black);
+	appearance: none;
+	cursor: pointer;
+	transition: border-color 0.15s;
+	box-sizing: border-box;
+	font-family: var(--font-body-family);
+}
+
+
+.tisso-modal__size-select:focus {
+	outline: none;
+	border-color: var(--black);
+}
+
+/* Custom chevron */
+.tisso-modal__select-wrap::after {
+	content: '';
+	position: absolute;
+	right: 11px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 5px solid var(--black);
+	pointer-events: none;
+}
+
+.tisso-modal__atc {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+	width: 271px;
+	height: 46px;
+	background: var(--black);
+	color: var(--off-white);
+	border: 2px solid var(--black);
+	font-size: 16px;
+	font-weight: 400;
+	text-transform: uppercase;
+	cursor: pointer;
+	overflow: hidden;
+	transition: background 0.25s ease, color 0.25s ease;
+}
+
+.tisso-modal__atc:hover:not(:disabled) {
+	background: transparent;
+	color: var(--black);
+}
+
+.tisso-modal__atc:disabled {
+	cursor: not-allowed;
+}
+
+/* Animated arrow (shared) */
+.tisso-arrow-wrap {
+	display: inline-flex;
+	align-items: center;
+	width: 30px;
+	height: 12px;
+	overflow: hidden;
+	position: relative;
+	flex-shrink: 0;
+}
+
+.tisso-arrow-track {
+	display: inline-flex;
+	align-items: center;
+	gap: 20px;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%) translateX(0);
+}
+
+.tisso-modal__atc:hover:not(:disabled) .tisso-arrow-track {
+	animation: tissoBtnArrow 0.42s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes tissoBtnArrow {
+	0% {
+		transform: translateY(-50%) translateX(0);
+		opacity: 1;
+	}
+
+	45% {
+		transform: translateY(-50%) translateX(38px);
+		opacity: 1;
+	}
+
+	46% {
+		transform: translateY(-50%) translateX(-38px);
+		opacity: 0;
+	}
+
+	47% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(-50%) translateX(0);
+		opacity: 1;
+	}
+}
+
+/* Status message */
+.tisso-modal__status {
+	font-size: 10px;
+	font-weight: 600;
+	min-height: 14px;
+	margin: 6px 0 0;
+}
+
+.tisso-modal__status.is-success {
+	color: #2e7d32;
+}
+
+.tisso-modal__status.is-error {
+	color: #c62828;
+}
+
+/* =============================================
+DESKTOP ADD TO CART — pinned to bottom of panel
+============================================= */
+@media (min-width:1024px) {
+	.tisso-modal__atc-wrap {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 12px 20px 16px;
+		background: #fff;
+	}
+}
+
+/* =============================================
+    RESPONSIVE — TABLET
+    ============================================= */
+@media (max-width: 900px) {
+	.tisso-grid__list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.tisso-modal__atc-wrap {
+		margin: 18px;
+	}
+}
+
+@media (max-width: 600px) {
+	.wild__heading {
+		text-align: center;
+		font-size: 24px;
+	}
+
+	.tisso-grid__inner {
+		padding: 0 0 40px;
+	}
+
+	.tisso-modal__desc {
+		font-size: 13px;
+		font-weight: 300;
+		height: 45px;
+	}
+
+	.tisso-grid__list {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 3px;
+		padding: 0 12px
+	}
+
+	/* Modal full screen on mobile */
+	.tisso-modal__panel {
+		width: 311px;
+		height: 447px;
+		max-height: 100dvh;
+		overflow-y: auto;
+		filter: drop-shadow(0 2px 4px #00000033);
+	}
+
+	.tisso-modal__body {
+		padding: 18px 18px 9px 18px;
+	}
+
+	.tisso-modal__top-row {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.tisso-modal__img-col {}
+
+	.tisso-modal__info-col {
+		padding: 16px 20px 0 0;
+	}
+
+	.tisso-modal__swatches,
+	.tisso-modal__select-wrap {
+		width: 100%;
+	}
+
+	.tisso-modal__atc {
+		width: 100%;
+	}
+  .tisso-grid__overlay {
+    inset: 25px 40px auto auto;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+button,
+.button,
+.btn,
+input[type="submit"],
+input[type="button"] {
+	font-family: 'Jost', sans-serif !important;
+}
