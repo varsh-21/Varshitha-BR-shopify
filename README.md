@@ -4,7 +4,28 @@
 ### 2.Product Grid and MODAL
 ### 3. Auto add to CART "soft jacket" PRODUCT
 
+## Project Structure
+Varshitha-BR-shopify/
+├── assets/
+│ ├── product-grid.js
+│ ├── product-grid.css
+│ ├── hero-banner.js
+│ └── hero-banner.css
+│
+├── sections/
+│ ├── product-grid.liquid
+│ └── hero-banner.liquid
+│
+├── templates/
+│ └── page.bannerandgrid.json
+│
+└── README.md
+
+
+
 ## FOLDER STRUCTURE
+
+
 Varshitha-BR-shopify/
 ├── assets/
 │   ├── product-grid.js        # JS for product grid interactions
