@@ -4,6 +4,7 @@
 ### 1. Hero Banner 
 ### 2.Product Grid and MODAL
 ### 3. Auto add to CART "soft jacket" PRODUCT
+# 🔗 Live Preview & Git Integration
 
 ## Project Structure
 
