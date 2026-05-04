@@ -105,6 +105,7 @@
 .tisso-modal.is-open {
 	opacity: 1;
 	pointer-events: all;
+	background-color: rgba(0, 0, 0, 0.5);	
 }
 
 .tisso-modal__backdrop {
@@ -217,8 +218,8 @@
 .tisso-modal__desc {
 	font-size: 14px;
 	font-weight: 300;
-	height: 64px;
-	line-height: 1.6;
+	height: 61px;
+	line-height: 110%;
 	color: var(--black);
 	margin: 0;
 	display: -webkit-box;
@@ -255,6 +256,11 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+}
+
+#tisso-modal .tisso-modal__option:has(.tisso-modal__swatches),
+#tisso-modal .tisso-modal__option:has(.tisso-modal__swatch) {
+  order: -1; /* 1. Colors  */
 }
 
 /* Option label e.g. "Color", "Size" */
@@ -497,9 +503,9 @@ DESKTOP ADD TO CART — pinned to bottom of panel
 	}
 
 	.tisso-modal__desc {
-		font-size: 13px;
+		font-size: 12px;
 		font-weight: 300;
-		height: 45px;
+		height: 52px;
 	}
 
 	.tisso-grid__list {
@@ -528,7 +534,7 @@ DESKTOP ADD TO CART — pinned to bottom of panel
 	.tisso-modal__img-col {}
 
 	.tisso-modal__info-col {
-		padding: 16px 20px 0 0;
+		padding: 16px 0 0 0;
 	}
 
 	.tisso-modal__swatches,
