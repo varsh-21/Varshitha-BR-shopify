@@ -183,20 +183,26 @@ MOBILE HEADER  (visible ≤ 900px)
 
 /* CHOOSE GIFT button inside drawer — yellow */
 .tisso-mobile-drawer__btn {
-	align-items: center;
-	gap: 18px;
+	gap: 25px;
 	height: 44px;
-	padding: 10px 20px;
+	width: 244px;
+	padding:  10px 40px;
 	background: var(--yellow);
 	color: #000;
 	text-decoration: none;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 400;
 	font-family: var(--font-body-family);
 	text-transform: uppercase;
 	border: 2px solid var(--yellow);
 	overflow: hidden;
 	transition: background 0.22s var(--ease);
+	display: flex;
+	white-space: nowrap;
+	align-items: center;
+	margin: 0 auto;
+	align-items: center;
+
 }
 
 .tisso-mobile-drawer__btn:hover {
