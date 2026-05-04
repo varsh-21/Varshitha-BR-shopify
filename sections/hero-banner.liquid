@@ -1,0 +1,325 @@
+<script src="{{ 'hero-banner.js' | asset_url }}" defer></script>
+
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+
+{% comment %}
+  Section: hero-banner.liquid
+  Description: Tisso Vison Gift Guide Banner — .
+  Structure:
+    1. Fixed header (3 items in flex row):
+       - Left:   Logo image (151.44 x 19px)
+       - Center: Editable text "Find the ideal gift for your loved ones."
+       - Right:  "CHOOSE GIFT →" button 
+    2. Hero content area (2-col grid):
+       - Left col:  Gift guide, heading, description, SHOP NOW button, subtext
+       - Full col: illustration image as FULL BACKGROUND COVER 
+  All red-rectangle texts editable via Theme Customizer.
+
+{% endcomment %}
+
+{%- comment -%} ── FIXED HEADER BAR ── {%- endcomment -%}
+<header id="tisso-header" class="tisso-header" role="banner">
+  <div class="tisso-header__inner">
+
+{%- comment -%} 1. Logo {%- endcomment -%}
+  <div class="tisso-header__desktop">
+    <div class="tisso-header__logo">
+      {%- if section.settings.logo != blank -%}
+        {{
+          section.settings.logo
+          | image_url: width: 304
+          | image_tag:
+            loading: 'eager',
+            width: 151,
+            height: 19,
+            class: 'tisso-header__logo-img',
+            alt: section.settings.logo.alt | default: shop.name
+        }}
+      {%- else -%}
+        <span class="tisso-header__logo-text">{{ shop.name | upcase }}</span>
+      {%- endif -%}
+    </div>
+    {%- comment -%} 2. Center tagline — editable {%- endcomment -%}
+    <p class="tisso-header__tagline">{{ section.settings.header_tagline }}</p>
+
+    {%- comment -%} 3. CTA button — editable {%- endcomment -%}
+    <a
+      href="{{ section.settings.header_btn_url }}"
+      class="tisso-header__btn"
+      aria-label="{{ section.settings.header_btn_label }}"
+    >
+      <span class="tisso-header__btn-label">{{ section.settings.header_btn_label }}</span>
+      <span class="tisso-arrow-wrap" aria-hidden="true">
+      <span class="tisso-arrow-track">
+    <svg
+      class="tisso-arrow-icon"
+      width="24"
+      height="10"
+      viewBox="0 0 24 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 5H20M20 5L16 1M20 5L16 9"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+        </span>
+      </span>
+    </a>
+
+  </div>
+</div>   
+  {%- comment -%} ── MOBILE inner (hidden on desktop) ── {%- endcomment -%}
+  <div class="tisso-header__mobile" id="tisso-mobile-header">
+
+    {%- comment -%} Closed state: hamburger + logo {%- endcomment -%}
+    <div class="tisso-mobile-bar">
+      <button
+        class="tisso-mobile-toggle"
+        id="tisso-mobile-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="tisso-mobile-drawer"
+      >
+        {%- comment -%} Hamburger icon ≡ {%- endcomment -%}
+        <span class="tisso-mobile-toggle__icon tisso-mobile-toggle__icon--open" aria-hidden="true">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><path d="M0 1H22M0 8H22M0 15H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        {%- comment -%} Close icon × {%- endcomment -%}
+        <span class="tisso-mobile-toggle__icon tisso-mobile-toggle__icon--close" aria-hidden="true" style="display:none;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 1L15 15M15 1L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+      </button>
+
+      <div class="tisso-mobile-bar__logo">
+        {%- if section.settings.logo != blank -%}
+          {{
+            section.settings.logo
+            | image_url: width: 304
+            | image_tag:
+              loading: 'eager',
+              width: 130,
+              height: 16,
+              class: 'tisso-header__logo-img',
+              alt: section.settings.logo.alt | default: shop.name
+          }}
+        {%- else -%}
+          <span class="tisso-header__logo-text">{{ shop.name | upcase }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Mobile drawer — slides down when open {%- endcomment -%}
+    <div
+      class="tisso-mobile-drawer"
+      id="tisso-mobile-drawer"
+      aria-hidden="true"
+    >
+      <p class="tisso-mobile-drawer__tagline">{{ section.settings.header_tagline }}</p>
+      <a href="{{ section.settings.header_btn_url }}" class="tisso-mobile-drawer__btn">
+        <span>{{ section.settings.header_btn_label }}</span>
+        <span class="tisso-arrow-wrap" aria-hidden="true">
+          <span class="tisso-arrow-track">
+           <svg width="30" height="12" viewBox="0 0 30 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.75 4.77295L8.69476e-08 4.77295L-8.69476e-08 6.27295L0.75 6.27295L0.75 5.52295L0.75 4.77295ZM29.5702 6.05328C29.8631 5.76039 29.8631 5.28551 29.5702 4.99262L24.7972 0.21965C24.5043 -0.0732435 24.0294 -0.0732435 23.7366 0.21965C23.4437 0.512543 23.4437 0.987417 23.7366 1.28031L27.9792 5.52295L23.7366 9.76559C23.4437 10.0585 23.4437 10.5334 23.7366 10.8263C24.0294 11.1191 24.5043 11.1191 24.7972 10.8263L29.5702 6.05328ZM0.75 5.52295L0.75 6.27295L29.0399 6.27295L29.0399 5.52295L29.0399 4.77295L0.75 4.77295L0.75 5.52295Z" fill="black"/>
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+</header>
+
+{%- comment -%} ── HERO BANNER ──DESKTOP {%- endcomment -%}
+<section
+  id="tisso-banner"
+  class="tisso-banner">
+  <div class="tisso-banner__inner">
+    {%- comment -%} LEFT: text content {%- endcomment -%}
+    <div class="tisso-banner__content">
+
+      <h1 class="tisso-banner__heading">{{ section.settings.banner_heading }}</h1>
+        <p class="mobile__subtitle">{{ section.settings.hero_subtitle | default: 'Discover Joy: Your Ultimate Holiday Gift Destination.' }}</p>
+      {%- if section.settings.banner_description != blank -%}
+        <p class="tisso-banner__description">{{ section.settings.banner_description }}</p>
+      {%- endif -%}
+
+      <a
+        href="{{ section.settings.shop_btn_url }}"
+        class="tisso-banner__shop-btn"
+        aria-label="{{ section.settings.shop_btn_label }}"
+      >
+        <span class="tisso-banner__shop-btn-label">{{ section.settings.shop_btn_label }}</span>
+        <span class="tisso-arrow-wrap" aria-hidden="true">
+          <span class="tisso-arrow-track">
+            <svg
+              class="tisso-arrow-icon"
+              width="24"
+              height="10"
+              viewBox="0 0 24 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 5H20M20 5L16 1M20 5L16 9"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </span>
+      </a>
+    </div>
+    {%- comment -%}
+      RIGHT: illustration as FULL background cover.
+      The div fills the entire right column — image covers it via background-size: cover.
+    {%- endcomment -%}
+    <div
+      class="tisso-banner__bg-image"
+      {%- if section.settings.banner_image != blank -%}
+        style="background-image: url('https://cdn.shopify.com/s/files/1/0802/6688/7398/files/mobile-bacground_256x256.png?v=1777362589 | image_url: width: 1400 ');"
+        role="img"
+        aria-label="{{ section.settings.banner_image.alt | default: 'Gift Guide illustration' }}"
+      {%- endif -%}
+    ></div>
+  </div>
+</section>
+    <div class="banner_below_sub_text">
+      {%- if section.settings.banner_subtext != blank -%}
+        <p class="tisso-banner__subtext">{{ section.settings.banner_subtext }}</p>
+      {%- endif -%}
+      {%- if section.settings.banner_subtext_mobile != blank -%}
+        <p class="tisso-banner__subtext_mobile">{{ section.settings.banner_subtext_mobile }}</p>
+      {%- endif -%}
+    </div>
+
+
+{% schema %}
+{
+  "name": "HERO Banner",
+  "tag": "section",
+  "class": "tisso-banner-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "HEADER BAR"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image (151 x 19px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "header_tagline",
+      "label": "Header Center Text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "header_btn_label",
+      "label": "Header Button Label",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "header_btn_url",
+      "label": "Header Button URL"
+    },
+    {
+      "type": "header",
+      "content": "HERO BANNER"
+    },  
+    {
+      "type": "text",
+      "id": "banner_heading",
+      "label": "Main Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Mobile Heading",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+    },
+    {
+      "type": "textarea",
+      "id": "banner_description",
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this festive season."
+    },
+    {
+      "type": "text",
+      "id": "banner_subtext",
+      "label": "Subtext (below SHOP NOW button)",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "text",
+      "id": "banner_subtext_mobile",
+      "label": "Mobile Subtext (below SHOP NOW button) ",
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+    },
+    {
+      "type": "text",
+      "id": "shop_btn_label",
+      "label": "Shop Button Label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "shop_btn_url",
+      "label": "Shop Button URL"
+    },
+
+    {
+      "type": "header",
+      "content": "COLORS"
+    },
+    {
+      "type": "color",
+      "id": "banner_bg_color",
+      "label": "Banner Background",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "color",
+      "id": "banner_text_color",
+      "label": "Banner Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "banner_accent_color",
+      "label": "Eyebrow Accent Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "shop_btn_bg",
+      "label": "Shop Button Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "shop_btn_text",
+      "label": "Shop Button Text Color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "HERO Banner",
+      "category": "Custom"
+    }
+  ]
+}
+
+{% endschema %}

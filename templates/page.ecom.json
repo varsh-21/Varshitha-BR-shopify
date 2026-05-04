@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {
+        "logo": "shopify://shop_images/Group_1000007777.png",
+        "header_tagline": "Find the ideal gift for your loved ones.",
+        "header_btn_label": "CHOOSE GIFT",
+        "header_btn_url": "",
+        "banner_heading": "The Gift Guide",
+        "hero_subtitle": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+        "banner_description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this festive season.",
+        "banner_subtext": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
+        "banner_subtext_mobile": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR",
+        "shop_btn_label": "SHOP NOW",
+        "shop_btn_url": "",
+        "banner_bg_color": "#f2f2f2",
+        "banner_text_color": "#000000",
+        "banner_accent_color": "#000000",
+        "shop_btn_bg": "#000000",
+        "shop_btn_text": "#ffffff"
+      }
+    },
+    "product_grid": {
+      "type": "product-grid",
+      "blocks": {
+        "product_96Gjfd": {
+          "type": "product",
+          "settings": {
+            "product": "longsleeve-cotton-top"
+          }
+        },
+        "product_qF8k9d": {
+          "type": "product",
+          "settings": {
+            "product": "dark-winter-jacket"
+          }
+        },
+        "product_q9ULtw": {
+          "type": "product",
+          "settings": {
+            "product": "classic-leather-jacket"
+          }
+        },
+        "product_6CjY4f": {
+          "type": "product",
+          "settings": {
+            "product": "ocean-blue-shirt"
+          }
+        },
+        "product_CQgN9L": {
+          "type": "product",
+          "settings": {
+            "product": "chequered-red-shirt"
+          }
+        },
+        "product_GGAUDG": {
+          "type": "product",
+          "settings": {
+            "product": "blue-silk-tuxedo"
+          }
+        }
+      },
+      "block_order": [
+        "product_96Gjfd",
+        "product_qF8k9d",
+        "product_q9ULtw",
+        "product_6CjY4f",
+        "product_CQgN9L",
+        "product_GGAUDG"
+      ],
+      "settings": {
+        "wild_heading": "Tisso vison in the wild",
+        "soft_winter_jacket_handle": "dark-winter-jacket"
+      }
+    }
+  },
+  "order": [
+    "hero_banner",
+    "product_grid"
+  ]
+}

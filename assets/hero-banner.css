@@ -1,0 +1,568 @@
+:root {
+  --tisso-header-h:    64px;
+  --black:   #000000;
+  --off-white:   #F7F7F7;
+  --yellow:      #FFF544;
+  --yellow-dark: #d9aa1e;
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --grey:  #333333;
+  --font-body-family:  'Jost', sans-serif;
+}
+
+/* Ecom Header  + HERO BANNER*/
+/* =============================================
+    HEADER BAR
+============================================= */
+.tisso-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9000;
+	height: var(--tisso-header-h);
+	background: var(--off-white);
+	color: var(--black);
+}
+
+.tisso-header__inner {
+	max-width: 1440px;
+	margin: 0 auto;
+	height: 100%;
+	padding: 0 40px;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+}
+
+/* =============================================
+DESKTOP HEADER  (visible > 900px)
+============================================= */
+.tisso-header__desktop {
+	height: var(--tisso-header-h);
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+}
+
+/* Logo */
+.tisso-header__logo {
+	flex-shrink: 0;
+	line-height: 0;
+}
+
+.tisso-header__logo-img {
+	width: 151.44px;
+	height: 19px;
+	object-fit: contain;
+	display: block;
+}
+
+.tisso-header__logo-text {
+	font-size: 15px;
+	font-weight: 800;
+	letter-spacing: 0.2em;
+	color: var(--black);
+	white-space: nowrap;
+}
+
+/* Center tagline */
+.tisso-header__tagline {
+	flex: 1;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--black);
+	margin: 0;
+	padding: 0 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Header CTA button */
+.tisso-header__btn {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	height: 44px;
+	width: 207px;
+	padding: 0 20px;
+	background: var(--yellow);
+	color: #000000;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: var(--font-body-family);
+	text-transform: uppercase;
+	white-space: nowrap;
+	border: 2px solid var(--yellow);
+	transition: background 0.22s var(--ease), border-color 0.22s var(--ease);
+	overflow: hidden;
+}
+
+.tisso-header__btn:hover {
+	background: var(--yellow);
+	border-color: var(--yellow-dark);
+}
+
+/* =============================================
+MOBILE HEADER  (visible ≤ 900px)
+============================================= */
+.tisso-header__mobile {
+	display: none;
+	/* shown via media query */
+}
+
+/* Top bar:hamburger | logo | (shop now when open) */
+.tisso-mobile-bar {
+	height: 56px;
+	padding: 0 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	background: #fff;
+}
+
+/* Hamburger / close toggle */
+.tisso-mobile-toggle {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	color: var(--black);
+	line-height: 0;
+	flex-shrink: 0;
+}
+
+/* Center logo */
+.tisso-mobile-bar__logo {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	line-height: 0;
+}
+
+.tisso-mobile-bar__logo .tisso-header__logo-img {
+	width: 130px;
+	height: 16px;
+}
+
+/* Drawer — slides down */
+.tisso-mobile-drawer {
+	background: var(--off-white);
+	overflow: hidden;
+	max-height: 0;
+	transition: max-height 0.35s var(--ease), padding 0.35s var(--ease);
+	padding: 0 16px;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	text-align: center;
+}
+
+.tisso-mobile-drawer.is-open {
+	max-height: 300px;
+	padding: 25px 65px;
+	background: var(--off-white);
+}
+
+/* Tagline inside drawer */
+.tisso-mobile-drawer__tagline {
+	font-size: 16px;
+	color: var(--black);
+	margin: 0 0 16px;
+	line-height: 1.5;
+	opacity: 0.85;
+	white-space: nowrap; 
+}
+
+/* CHOOSE GIFT button inside drawer — yellow */
+.tisso-mobile-drawer__btn {
+	gap: 25px;
+	height: 44px;
+	width: 244px;
+	padding:  10px 40px;
+	background: var(--yellow);
+	color: #000;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: var(--font-body-family);
+	text-transform: uppercase;
+	border: 2px solid var(--yellow);
+	overflow: hidden;
+	transition: background 0.22s var(--ease);
+	display: flex;
+	white-space: nowrap;
+	align-items: center;
+	margin: 0 auto;
+	align-items: center;
+
+}
+
+.tisso-mobile-drawer__btn:hover {
+	background: var(--yellow-dark);
+	border-color: var(--yellow-dark);
+}
+
+/* =============================================
+    SHARED ANIMATED ARROW
+============================================= */
+.tisso-arrow-wrap {
+	display: inline-flex;
+	align-items: center;
+	width: 20px;
+	height: 12px;
+	overflow: hidden;
+	position: relative;
+	flex-shrink: 0;
+}
+
+.tisso-arrow-track {
+	display: inline-flex;
+	align-items: center;
+	gap: 20px;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%) translateX(0);
+}
+
+.tisso-header__btn:hover .tisso-arrow-track,
+.tisso-banner__shop-btn:hover .tisso-arrow-track,
+.tisso-mobile-drawer__btn:hover .tisso-arrow-track {
+	animation: tissoBtnArrow 0.42s var(--ease) forwards;
+}
+
+@keyframes tissoBtnArrow {
+	0% {
+		transform: translateY(-50%) translateX(0);
+		opacity: 1;
+	}
+
+	45% {
+		transform: translateY(-50%) translateX(38px);
+		opacity: 1;
+	}
+
+	46% {
+		transform: translateY(-50%) translateX(-38px);
+		opacity: 0;
+	}
+
+	47% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(-50%) translateX(0);
+		opacity: 1;
+	}
+}
+
+/* =============================================
+     HERO BANNER WRAPPER
+     ============================================= */
+
+/* Grid:left text col + right full-bleed image col */
+.tisso-banner__inner {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+/* =============================================
+     LEFT:TEXT CONTENT
+     ============================================= */
+.tisso-banner__content {
+	padding: 400px 40px 80px 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.mobile__subtitle {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--black);
+	margin: 0 auto;
+	width: 80%;
+}
+
+.tisso-banner__heading {
+	font-size: 30px;
+	font-family: var(--font-body-family);
+	font-weight: 500;
+	color: var(--black);
+	line-height: 100%;
+	margin-bottom: 0px;
+}
+
+.tisso-banner__description {
+	font-size: 20px;
+	font-weight: 400;
+	color: var(--black);
+	max-width: 580px;
+	margin: 28px 0;
+	line-height: 140%;
+}
+
+/* SHOP NOW button */
+.tisso-banner__shop-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	height: 50px;
+	width: 220px;
+	padding: 0 26px;
+	background: var(--black);
+	color: var(--off-white);
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 400;
+	text-transform: uppercase;
+	border: 2px solid var(--black);
+	align-self: flex-start;
+	overflow: hidden;
+	transition: background 0.25s var(--ease), color 0.25s var(--ease);
+	justify-content: center;
+	filter: drop-shadow(0 2px 4px #00000033);
+}
+
+.tisso-banner__shop-btn:hover {
+	background: var(--yellow);
+	color: var(--black);
+	justify-content: center;
+}
+
+.tisso-banner__subtext,
+.tisso-banner__subtext_mobile {
+	font-size: 16px;
+	text-transform: uppercase;
+	padding-top: 3px;
+	margin: 8px 0 0;
+	color: var(--black);
+	background: var(--off-white);
+}
+
+/* =============================================
+     RIGHT:FULL BACKGROUND COVER IMAGE
+     ============================================= */
+.tisso-banner__bg-image {
+	/* Stretches to fill the entire right column */
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	min-height: 500px;
+}
+
+/* =============================================
+     RESPONSIVE — TABLET (≤900px)
+     ============================================= */
+@media (max-width:900px) {
+	:root {
+		--tisso-header-h: 56px;
+	}
+
+	.tisso-header__desktop {
+		display: none;
+	}
+
+	.tisso-header__mobile {
+		display: block;
+		background: var(--off-white)
+	}
+
+	.tisso-header__tagline {
+		display: none;
+	}
+
+	.tisso-banner__inner {
+		grid-template-columns: 1fr;
+	}
+
+	/* Image goes on top on tablet/mobile */
+	.tisso-banner__bg-image {
+		order: -1;
+		min-height: 300px;
+	}
+
+	.tisso-banner__heading {
+		font-size: 40px;
+	}
+}
+
+/* Tablet and large screens */
+@media (min-width:600px) {
+	.tisso-banner {
+		background-image: url("https://varsh-dev.myshopify.com/cdn/shop/files/hero-banner.png?v=1777037933&width=1400");
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		color: var(--black);
+		padding-top: var(--tisso-header-h);
+		overflow: hidden;
+		position: relative;
+		max-height: 580px;
+	}
+
+	.tisso-banner__content {
+		padding: 250px 44px 60px;
+	}
+
+	.tisso-banner__heading {
+		font-size: 30px;
+	}
+
+	.mobile__subtitle,
+	.tisso-banner__subtext_mobile {
+		display: none;
+	}
+
+	.tisso-banner__description {
+		font-size: 12px;
+		max-width: 280px;
+	}
+}
+
+/* =============================================
+     RESPONSIVE — MOBILE (≤600px)
+============================================= */
+@media (max-width:600px) {
+	:root {
+		--tisso-header-h: 56px;
+	}
+
+	.tisso-header__inner {
+		display: none;
+	}
+
+	.tisso-banner__subtext {
+		display: none;
+	}
+
+	.tisso-banner__subtext_mobile {
+		font-size: 14px;
+	}
+
+	.tisso-banner__heading {
+		font-size: 30px;
+	}
+
+	.tisso-banner {
+		display: flex !important;
+		flex-direction: column !important;
+	}
+
+	.tisso-banner__bg-image {
+		height: 264px;
+		max-width: 686px;
+		background-image: url('https://varshitha-br-48-teststore.myshopify.com/cdn/shop/files/mobile-bacground.png?v=1777362589&width=1400');
+		justify-content: center;
+		background-position: right;
+		align-items: end;
+		display: flex !important;
+		background-size: cover;
+		background-repeat: repeat;
+	}
+
+	.tisso-header__inner {
+		padding: 0 16px;
+		gap: 10px;
+	}
+
+	.tisso-header__logo-img {
+		width: 110px;
+		height: 14px;
+	}
+
+	.tisso-banner__heading {
+		font-size: 30px;
+    margin-bottom: 20px;
+	}
+
+	.tisso-banner__description {
+		font-size: 12px;
+		max-width: 308px;
+	}
+
+	.tisso-header__btn {
+		height: 38px;
+		padding: 0 12px;
+		font-size: 10px;
+		gap: 7px;
+	}
+
+	.tisso-banner__content {
+		order: -1;
+		padding: 24px 16px 16px;
+		text-align: center;
+		align-items: center;
+		position: relative;
+	}
+
+	.tisso-banner__description {
+		display: none;
+	}
+
+	.tisso-banner__shop-btn {
+		height: 45px;
+		align-self: center;
+		font-size: 16px;
+		position: absolute;
+		top: 218%;
+		z-index: 2;
+	}
+
+	.banner_below_sub_text {
+		order: 3;
+		width: 100%;
+		text-align: center;
+		color: var(--black);
+	}
+}
+
+.banner_below_sub_text {
+	width: 100%;
+	text-align: center;
+}
+
+@media (min-width:1025px) {
+	.tisso-banner {
+		margin: 0 auto;
+		max-width: 1400px;
+		min-height: 720px;
+	}
+
+	.tisso-banner__heading {
+		font-size: 70px;
+	}
+
+	.mobile__subtitle {
+		display: none;
+	}
+
+	.tisso-banner__description {
+		font-size: 20px;
+		max-width: 515px;
+		margin: 38px 0;
+		line-height: 140%;
+	}
+
+	.tisso-banner__content {
+		padding: 295px 44px 60px;
+	}
+}
+
+button, 
+.button, 
+.btn, 
+input[type="submit"], 
+input[type="button"] {
+  font-family: 'Jost', sans-serif !important;
+}
